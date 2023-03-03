@@ -36,6 +36,8 @@ contract Verifier_L1 is Ownable {
 
     /// @dev sends a message containing user's Starknet address
     function verifyOnL2(uint256 _l2_user) external {
+        require(_l2_user != 0);
+        // require(_l2_user < 2 ** 251 + 17 * 2 ** 192 + 1); // felt check
         uint256[] memory payload = new uint256[](2);
         payload[0] = uint256(uint160(msg.sender));
         payload[1] = _l2_user;
